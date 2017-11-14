@@ -19,7 +19,7 @@ def process_question(question):
 		
 		#(proper_nouns, keywords) = reprioritize_nouns(keywords)
 		
-	print (answer_type, keywords, proper_nouns)
+	return (answer_type, keywords, proper_nouns)
 
 def get_answer_type(question):
 	if "who" in question:
