@@ -24,7 +24,7 @@ print classified
 
 
 
-
+# NER tagging optional?
 
 def main():
 	print "ask me a question"
