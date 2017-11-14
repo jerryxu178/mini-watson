@@ -5,20 +5,21 @@ from constants import common_verbs, keyword_tags
 def process_question(question):
 	tokens = nltk.word_tokenize(question)
 	tagged_tokens = nltk.pos_tag(tokens)
-
+	print tagged_tokens
 	# use helper functions to parse question here
 	answer_type = get_answer_type(question.lower())
 	keywords = get_keywords(tagged_tokens)
 	proper_nouns = get_proper_n(tagged_tokens)
 	# use all other nouns if no proper nouns found
 	if len(proper_nouns) == 0:
+
 		sep_keywords = reprioritize_nouns(keywords)
 		proper_nouns = sep_keywords[0]
 		keywords = sep_keywords[1]
-		"""
-		(proper_nouns, keywords) = reprioritize_nouns(keywords)
-		"""
-	return (answer_type, keywords, proper_nouns)
+		
+		#(proper_nouns, keywords) = reprioritize_nouns(keywords)
+		
+	print (answer_type, keywords, proper_nouns)
 
 def get_answer_type(question):
 	if "who" in question:
@@ -53,10 +54,12 @@ def get_proper_n(tagged_tokens):
 
 def reprioritize_nouns(tagged_tokens):
 	noun_list = []
+	revised_tagged_tokens = []
 	for token in tagged_tokens:
 		if token[1] == "NN" or token[1] == "NNS":
 			noun_list.append(token[0])
-			tagged_tokens.remove(token)
-	return (noun_list, tagged_tokens)
+		else:
+			revised_tagged_tokens.append(token)
+	return (noun_list, revised_tagged_tokens)
 
-process_question("who is John Ben eating")
+process_question("who, the man on the Moon is eating")
