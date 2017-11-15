@@ -2,6 +2,7 @@ import os
 import wikipedia
 import nltk
 from nltk.tag.stanford import StanfordNERTagger
+import re
 
 java_path = "C:/Program Files/Java/jdk1.8.0_131/bin/java.exe"
 os.environ['JAVA_HOME'] = java_path
