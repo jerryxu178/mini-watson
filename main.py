@@ -10,7 +10,6 @@ tagged_tokens = nltk.pos_tag(tokens) # tag tokens
 #nltk.help.upenn_tagset('JJ')
 
 
-
 # NER tagging optional?
 from nltk.tag.stanford import StanfordNERTagger
 
