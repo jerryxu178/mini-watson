@@ -1,6 +1,7 @@
 import nltk #remove this?
 from parse_question import process_question
 from wiki_search import search_wikipedia
+from process_answers import prepare_answers
 """
 text = "John Melon is a good worker at Walmart"
 sents = nltk.sent_tokenize(text) # build list of sentences
@@ -24,7 +25,7 @@ classified = st.tag(tokens)
 
 print classified
 """
-
+ 
 def main():
 	print "ask me a question"
 	while True:
@@ -33,9 +34,23 @@ def main():
 		if len(proper_nouns) == 0:
 			print "no subjects found in question, please try again"
 			continue
-		print search_wikipedia(answer_type, keywords, proper_nouns)
-
-
+		scored_answers = search_wikipedia(answer_type, keywords, proper_nouns)
+		answer_list = prepare_answers(scored_answers, question)
+		if len(answer_list) == 0:
+			print "no potential answers found"
+			continue
+		print "Is the answer " + answer_list[0] + "? [y/n]"
+		reply = raw_input(">")
+		if reply == "y":
+			print "great!"
+		elif reply == "n":
+			if len(answer_list) > 1:
+				print "Here were my other guesses: " + str(answer_list[1:])
+			else:
+				print "no other guesses"
+		else:
+			print "unexpected response, was expecting 'y' or 'n'"
+		print "\nfeel free to ask another question"
 
 if __name__ == "__main__":
 	main()
