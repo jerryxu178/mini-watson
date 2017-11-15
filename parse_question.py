@@ -5,7 +5,6 @@ from constants import common_verbs, keyword_tags
 def process_question(question):
 	tokens = nltk.word_tokenize(question)
 	tagged_tokens = nltk.pos_tag(tokens)
-	print tagged_tokens
 	# use helper functions to parse question here
 	answer_type = get_answer_type(question.lower())
 	keywords = get_keywords(tagged_tokens)
@@ -27,7 +26,7 @@ def get_answer_type(question):
 	elif "when" in question:
 		return "TIME"
 	elif "where" in question:
-		return "PLACE"
+		return "LOCATION"
 	else:
 		return "ANY"
 

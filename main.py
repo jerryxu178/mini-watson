@@ -1,7 +1,7 @@
 import nltk #remove this?
 from parse_question import process_question
 from wiki_search import search_wikipedia
-
+"""
 text = "John Melon is a good worker at Walmart"
 sents = nltk.sent_tokenize(text) # build list of sentences
 tokens = nltk.word_tokenize(text) # build list of words
@@ -23,7 +23,7 @@ st = StanfordNERTagger('stanford-ner/classifiers/english.all.3class.distsim.crf.
 classified = st.tag(tokens)
 
 print classified
-
+"""
 
 def main():
 	print "ask me a question"
@@ -33,10 +33,9 @@ def main():
 		if len(proper_nouns) == 0:
 			print "no subjects found in question, please try again"
 			continue
-		#search_wikipedia(answer_type, keywords, proper_nouns)
+		print search_wikipedia(answer_type, keywords, proper_nouns)
 
-		if statement.lower() == "quit":
-			break
+
 
 if __name__ == "__main__":
 	main()

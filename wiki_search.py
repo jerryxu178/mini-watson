@@ -9,13 +9,6 @@ os.environ['JAVA_HOME'] = java_path
 st = StanfordNERTagger('stanford-ner/classifiers/english.all.3class.distsim.crf.ser.gz',
 					   'stanford-ner/stanford-ner.jar',
 					   encoding='utf-8')
-#classified = st.tag(tokens)
-
-text = "John Melon is a good worker at Walmart"
-sents = nltk.sent_tokenize(text) # build list of sentences
-tokens = nltk.word_tokenize(text) # build list of words
-tagged_tokens = nltk.pos_tag(tokens) # tag tokens
-
 
 def search_wikipedia(answer_type, keywords, proper_nouns):
 	wiki_pages = []
@@ -50,7 +43,14 @@ def process_page(answer_type, keywords, page):
 
 def generate_NE_dict(answer_type, keywords, page):
 	NE_dict = {}
-	NER_tagged_page = st.tag(nltk.word_tokenize(page.content))
+	contents = page.content
+	contents = contents.encode('ascii', 'ignore')
+	contents = contents.replace("\n", "")
+	contents = contents.replace("=", "")
+
+
+
+	NER_tagged_page = st.tag(nltk.word_tokenize(contents))
 	curr_entity = "" 
 	curr_tag = ""
 	for elt in NER_tagged_page:
@@ -68,9 +68,34 @@ def generate_NE_dict(answer_type, keywords, page):
 
 
 	#tokens = nltk.word_tokenize(page.content)
+def process_page(answer_type, keywords, page):
+	NE_dict = generate_NE_dict(answer_type, keywords, page)
+	sentences = []
+	encountered_NE = []
+	for NE in NE_dict:
+		if NE_dict[NE] == answer_type or answer_type == "ANY":
+			contents = page.content
+			contents = contents.encode('ascii', 'ignore') # contents = contents.encode('ascii', 'replace') 
+			contents = contents.replace("\n", "")
+			contents = contents.replace("=", "")
+
+
+			sentences += [s + '.' for s in (contents).split('.') if NE in s]
+			encountered_NE.append(NE)
+	sentences = list(set(sentences))
+	scored_answers = []
+	for sent in sentences:
+		score = 0
+		for word in keywords:
+			if word[0] in sent:
+				score += 1
+		for NE in encountered_NE:
+			if NE in sent:
+				scored_answers.append((NE, score))
+	scored_answers.sort(key=lambda ans: ans[1])
+	return scored_answers
 
 
 
-
-print process_page("ORGANIZATION", "born", wikipedia.page("Alan Devlin"))
+# print process_page("LOCATION", "born", wikipedia.page("Alan Devlin"))
 #print st.tag(nltk.word_tokenize((wikipedia.page("Alan Devlin")).content))
