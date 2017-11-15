@@ -20,36 +20,12 @@ def search_wikipedia(answer_type, keywords, proper_nouns):
 
 	answers = []
 	for page in wiki_pages:
-		answers.append(process_page(answer_type, keywords, page))
+		answers +=process_page(answer_type, keywords, page)
 	return answers
-
-"""
-def process_page(answer_type, keywords, page):
-	sents = nltk.sent_tokenize(page.content)
-	scored_answers = []
-	for sentence in sents:
-		sent_tokens = nltk.word_tokenize(sentence)
-		tagged_sentence = st.tag(sent_tokens)
-		score = 0
-		answers = []
-		for elt in tagged_sentence:
-			if elt[0] in keywords:
-				score += 1
-			if elt[1] == answer_type:
-				answers.append(elt[0])
-		for ans in answers:
-			scored_answers.append((ans, score))
-	return scored_answers"""
 
 def generate_NE_dict(answer_type, keywords, page):
 	NE_dict = {}
-	contents = page.content
-	contents = contents.encode('ascii', 'ignore')
-	contents = contents.replace("\n", "")
-	contents = contents.replace("=", "")
-
-
-
+	contents = convert_unicode(page.content)
 	NER_tagged_page = st.tag(nltk.word_tokenize(contents))
 	curr_entity = "" 
 	curr_tag = ""
@@ -66,20 +42,22 @@ def generate_NE_dict(answer_type, keywords, page):
 		NE_dict[str(curr_entity.strip())] = str(curr_tag)
 	return NE_dict
 
+def convert_unicode(contents):
+	contents = contents.encode('ascii', 'ignore')
+	contents = contents.replace("\n", "")
+	contents = contents.replace("=", "")
+	return contents
 
-	#tokens = nltk.word_tokenize(page.content)
+def contains(word, wordlist):
+	return word in wordlist or word+"s" in wordlist or word[:-1] in wordlist
+
 def process_page(answer_type, keywords, page):
 	NE_dict = generate_NE_dict(answer_type, keywords, page)
 	sentences = []
 	encountered_NE = []
 	for NE in NE_dict:
 		if NE_dict[NE] == answer_type or answer_type == "ANY":
-			contents = page.content
-			contents = contents.encode('ascii', 'ignore') # contents = contents.encode('ascii', 'replace') 
-			contents = contents.replace("\n", "")
-			contents = contents.replace("=", "")
-
-
+			contents = convert_unicode(page.content)
 			sentences += [s + '.' for s in (contents).split('.') if NE in s]
 			encountered_NE.append(NE)
 	sentences = list(set(sentences))
@@ -87,13 +65,25 @@ def process_page(answer_type, keywords, page):
 	for sent in sentences:
 		score = 0
 		for word in keywords:
-			if word[0] in sent:
+			sentence_words = nltk.word_tokenize(sent.lower())
+			if contains(word[0], sentence_words):
 				score += 1
 		for NE in encountered_NE:
 			if NE in sent:
 				scored_answers.append((NE, score))
-	scored_answers.sort(key=lambda ans: ans[1])
 	return scored_answers
+
+def tag_dates(text):
+    dates = [] # list of dates in text that require tagging
+    dates += re.findall(r'[ADFJMNOS]+[a-z]* [0-3]?[0-9], [1-2][0-9]{3}', text) # look for April 20, 1990
+    dates += re.findall(r'[ADFJMNOS]+[a-z]* [0-3]?[0-9] [1-2][0-9]{3}?', text) # look for April 20 1990
+    dates += re.findall(r'[ADFJMNOS]+[a-z]* [0-3]?[0-9]', text) # look for April 20
+    dates += re.findall(r'[1-2][0-9]{3}', text) # look for 1990
+    dates += re.findall(r'[0-1]?[0-9]/[0-3]?[0-9]/[1-2][0-9]{3}', text) # look for 04/20/1990
+    for date in dates:
+        if not already_tagged(date, text):
+            text = add_date_tag(date, text)
+    return text
 
 
 
