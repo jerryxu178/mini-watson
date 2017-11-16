@@ -41,6 +41,8 @@ def generate_NE_dict(answer_type, keywords, page):
 				curr_tag = ""
 	if curr_entity != "":
 		NE_dict[str(curr_entity.strip())] = str(curr_tag)
+	dates_dict = tag_dates(contents)
+	NE_dict.update(dates_dict)
 	return NE_dict
 
 def convert_unicode(contents):
@@ -75,18 +77,31 @@ def process_page(answer_type, keywords, page):
 	return scored_answers
 
 def tag_dates(text):
-    dates = [] # list of dates in text that require tagging
-    dates += re.findall(r'[ADFJMNOS]+[a-z]* [0-3]?[0-9], [1-2][0-9]{3}', text) # look for April 20, 1990
-    dates += re.findall(r'[ADFJMNOS]+[a-z]* [0-3]?[0-9] [1-2][0-9]{3}?', text) # look for April 20 1990
-    dates += re.findall(r'[ADFJMNOS]+[a-z]* [0-3]?[0-9]', text) # look for April 20
-    dates += re.findall(r'[1-2][0-9]{3}', text) # look for 1990
-    dates += re.findall(r'[0-1]?[0-9]/[0-3]?[0-9]/[1-2][0-9]{3}', text) # look for 04/20/1990
-    for date in dates:
-        if not already_tagged(date, text):
-            text = add_date_tag(date, text)
-    return text
+	# make dictionary of dates, where key is the date and value is "DATE"
+	temp_text = text
+	dates = [] # list of dates in text that require tagging
+	dates_dict = {}
+	dates += re.findall(r'[ADFJMNOS]+[a-z]* [0-3]?[0-9], [1-2][0-9]{3}', temp_text) # look for August 20, 1990
+	temp_text = remove_dates(temp_text, dates)
+	dates += re.findall(r'[ADFJMNOS]+[a-z]* [0-3]?[0-9] [1-2][0-9]{3}?', temp_text) # look for August 20 1990
+	temp_text = remove_dates(temp_text, dates)
+	dates += re.findall(r'[0-3]?[0-9] [ADFJMNOS]+[a-z]* [1-2][0-9]{3}?', temp_text) # look for 20 August 1990
+	temp_text = remove_dates(temp_text, dates)
+	dates += re.findall(r'[ADFJMNOS]+[a-z]* [1-2][0-9]{3}?', temp_text) # look for August 1990
+	temp_text = remove_dates(temp_text, dates)
+	dates += re.findall(r'[ADFJMNOS]+[a-z]* [0-3]?[0-9] ', temp_text) # look for August 20
+	temp_text = remove_dates(temp_text, dates)
+	dates += re.findall(r'[0-1]?[0-9]/[0-3]?[0-9]/[1-2][0-9]{3}', temp_text) # look for 8/20/1990
+	temp_text = remove_dates(temp_text, dates)
+	dates += re.findall(r'[1-2][0-9]{3}', temp_text) # look for 1990
+	temp_text = remove_dates(temp_text, dates)
+	for date in dates:
+		dates_dict[date] = "DATE"
+	return dates_dict
 
-
-
-# print process_page("LOCATION", "born", wikipedia.page("Alan Devlin"))
-#print st.tag(nltk.word_tokenize((wikipedia.page("Alan Devlin")).content))
+def remove_dates(text, dates):
+	# remove dates in list from the text in order to avoid double tagging
+	clean_text = text
+	for date in dates:
+		clean_text = clean_text.replace(date, "")
+	return clean_text
