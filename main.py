@@ -1,30 +1,7 @@
-import nltk #remove this?
 from parse_question import process_question
 from wiki_search import search_wikipedia
 from process_answers import prepare_answers
-"""
-text = "John Melon is a good worker at Walmart"
-sents = nltk.sent_tokenize(text) # build list of sentences
-tokens = nltk.word_tokenize(text) # build list of words
-tagged_tokens = nltk.pos_tag(tokens) # tag tokens
-#nltk.help.upenn_tagset('JJ')
 
-
-# NER tagging optional?
-from nltk.tag.stanford import StanfordNERTagger
-
-import os
-java_path = "C:/Program Files/Java/jdk1.8.0_131/bin/java.exe"
-os.environ['JAVA_HOME'] = java_path
-
-st = StanfordNERTagger('stanford-ner/classifiers/english.all.3class.distsim.crf.ser.gz',
-					   'stanford-ner/stanford-ner.jar',
-					   encoding='utf-8')
-classified = st.tag(tokens)
-
-print classified
-"""
- 
 def main():
 	print "ask me a question"
 	while True:
@@ -38,18 +15,18 @@ def main():
 		if len(answer_list) == 0:
 			print "No potential answers found"
 			continue
-		print "Is the answer " + answer_list[0] + "? [y/n]"
+		print "Is the answer " + answer_list[-1] + "? [y/n]"
 		reply = raw_input(">")
 		if reply == "y":
 			print "Great!"
 		elif reply == "n":
 			if len(answer_list) > 1:
-				print "Here were my other guesses: " + str(answer_list[1:])
+				print "Here were my other guesses: " + str(answer_list[:-1])[1:-1]
 			else:
-				print "I have no other guesses"
+				print "Hmm... I am stumped!"
 		else:
 			print "Unexpected response, I was expecting 'y' or 'n'"
-		print "\nFeel free to ask another question"
+		print "Please feel free to ask me another question"
 
 if __name__ == "__main__":
 	main()
