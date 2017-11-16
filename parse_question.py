@@ -24,7 +24,7 @@ def get_answer_type(question):
 	if "who" in question:
 		return "PERSON"
 	elif "when" in question:
-		return "TIME"
+		return "DATE"
 	elif "where" in question:
 		return "LOCATION"
 	else:
