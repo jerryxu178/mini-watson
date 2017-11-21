@@ -1,5 +1,8 @@
-#
+# answer retrieval for trivia-bot
 def prepare_answers(scored_answers, question):
+	"""
+	TODO
+	"""
 	filtered_answers = remove_unwanted_ans(scored_answers, question)
 	filtered_answers = combine_duplicate_ans(filtered_answers)
 	filtered_answers = combine_similar_answers(filtered_answers)
@@ -11,6 +14,9 @@ def prepare_answers(scored_answers, question):
 
 
 def remove_unwanted_ans(scored_answers, question):
+	"""
+	TODO
+	"""
 	filtered_answers = []
 	for answer in scored_answers:
 		if answer[1] != 0 and answer[0] not in question:
@@ -20,6 +26,9 @@ def remove_unwanted_ans(scored_answers, question):
 	return filtered_answers
 
 def combine_duplicate_ans(scored_answers):
+	"""
+	TODO
+	"""
 	answers_dict = {}
 	for answer in scored_answers:
 		if answer[0] in answers_dict:
@@ -38,6 +47,9 @@ def combine_duplicate_ans(scored_answers):
 	return ans_list
 
 def combine_similar_answers(scored_answers):
+	"""
+	TODO
+	"""
 	for ans in scored_answers:
 		for other_ans in scored_answers:
 			if ans[0] != other_ans[0] and ans[0] in other_ans[0]:
