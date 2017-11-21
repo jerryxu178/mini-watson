@@ -3,16 +3,21 @@ from wiki_search import search_wikipedia
 from process_answers import prepare_answers
 
 def main():
-	print "ask me a question"
+	"""
+	TODO
+	"""
+	print "Hello! Please ask me a question"
 	while True:
 		question = raw_input(">")		
 		(answer_type, keywords, proper_nouns) = process_question(question)
 		if len(proper_nouns) == 0:
+			# no proper or common nouns found in the question
 			print "I don't understand question's subject, please try again"
 			continue
 		scored_answers = search_wikipedia(answer_type, keywords, proper_nouns)
 		answer_list = prepare_answers(scored_answers, question)
 		if len(answer_list) == 0:
+			# searching Wikipedia yielded no results
 			print "No potential answers found"
 			continue
 		print "Is the answer " + answer_list[-1] + "? [y/n]"
