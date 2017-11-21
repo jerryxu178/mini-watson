@@ -1,3 +1,5 @@
+# all constants for trivia-bot are written here
+
 # 
 question_words = ["who", "what", "when", "where"]
 
