@@ -12,6 +12,9 @@ st = StanfordNERTagger('stanford-ner/classifiers/english.all.3class.distsim.crf.
 					   encoding='utf-8')
 
 def search_wikipedia(answer_type, keywords, proper_nouns):
+	"""
+	TODO
+	"""
 	wiki_pages = []
 	for noun in proper_nouns:
 		try:
@@ -25,6 +28,9 @@ def search_wikipedia(answer_type, keywords, proper_nouns):
 	return answers
 
 def generate_NE_dict(answer_type, keywords, page):
+	"""
+	TODO
+	"""
 	NE_dict = {}
 	contents = convert_unicode(page.content)
 	NER_tagged_page = st.tag(nltk.word_tokenize(contents))
@@ -46,15 +52,24 @@ def generate_NE_dict(answer_type, keywords, page):
 	return NE_dict
 
 def convert_unicode(contents):
+	"""
+	TODO
+	"""
 	contents = contents.encode('ascii', 'ignore')
 	contents = contents.replace("\n", "")
 	contents = contents.replace("=", "")
 	return contents
 
 def contains(word, wordlist):
+	"""
+	TODO
+	"""
 	return word in wordlist or word+"s" in wordlist or word[:-1] in wordlist
 
 def process_page(answer_type, keywords, page):
+	"""
+	TODO
+	"""
 	NE_dict = generate_NE_dict(answer_type, keywords, page)
 	sentences = []
 	encountered_NE = []
@@ -77,6 +92,9 @@ def process_page(answer_type, keywords, page):
 	return scored_answers
 
 def tag_dates(text):
+	"""
+	TODO
+	"""
 	# make dictionary of dates, where key is the date and value is "DATE"
 	temp_text = text
 	dates = [] # list of dates in text that require tagging
@@ -100,6 +118,9 @@ def tag_dates(text):
 	return dates_dict
 
 def remove_dates(text, dates):
+	"""
+	TODO
+	"""
 	# remove dates in list from the text in order to avoid double tagging
 	clean_text = text
 	for date in dates:
