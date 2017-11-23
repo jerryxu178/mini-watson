@@ -13,7 +13,8 @@ st = StanfordNERTagger('stanford-ner/classifiers/english.all.3class.distsim.crf.
 
 def search_wikipedia(answer_type, keywords, proper_nouns):
 	"""
-	TODO
+	Bring up wikipedia pages of proper nouns and/or proper nouns mentioned in
+	the question. 
 	"""
 	wiki_pages = []
 	for noun in proper_nouns:
@@ -29,7 +30,8 @@ def search_wikipedia(answer_type, keywords, proper_nouns):
 
 def generate_NE_dict(answer_type, keywords, page):
 	"""
-	TODO
+	Create a dictionary of named entities, with the entity as the key and the
+	corresponding tag as the value
 	"""
 	NE_dict = {}
 	contents = convert_unicode(page.content)
@@ -53,7 +55,7 @@ def generate_NE_dict(answer_type, keywords, page):
 
 def convert_unicode(contents):
 	"""
-	TODO
+	Convert wikipedia page contents from unicode to ascii 
 	"""
 	contents = contents.encode('ascii', 'ignore')
 	contents = contents.replace("\n", "")
