@@ -21,7 +21,7 @@ def process_question(question):
 
 def get_answer_type(question):
 	"""
-	TODO
+	Return the type of response that the question requires
 	"""
 	if "who" in question:
 		return "PERSON"
