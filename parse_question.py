@@ -4,7 +4,9 @@ from constants import common_verbs, keyword_tags
 
 def process_question(question):
 	"""
-	TODO
+	Parse the question string to retrieve the keywords and proper nouns that
+	are in the question, and also determine the appropriate type of answer
+	(person, date, etc.) needed
 	"""
 	tokens = nltk.word_tokenize(question)
 	tagged_tokens = nltk.pos_tag(tokens)
@@ -12,7 +14,7 @@ def process_question(question):
 	answer_type = get_answer_type(question.lower())
 	keywords = get_keywords(tagged_tokens)
 	proper_nouns = get_proper_n(tagged_tokens)
-	# use all other nouns if no proper nouns found
+	# use common nouns if no proper nouns found
 	if len(proper_nouns) == 0:
 		sep_keywords = reprioritize_nouns(keywords)
 		proper_nouns = sep_keywords[0]
@@ -21,7 +23,10 @@ def process_question(question):
 
 def get_answer_type(question):
 	"""
-	Return the type of response that the question requires
+	Return "PERSON" if question asks who
+	Return "DATE" if question asks when
+	Return "LOCATION" if question asks where
+	Otherwise return "ANY"
 	"""
 	if "who" in question:
 		return "PERSON"
@@ -34,7 +39,11 @@ def get_answer_type(question):
 
 def get_keywords(tagged_tokens):
 	"""
-	TODO
+	Retrieves keywords from POS tagged question
+	Keywords are nouns, verbs, and other important parts of speech. Common
+	verbs such as "was" and "were" are ignored
+
+	Returns a list of keywords
 	"""
 	keywords = []
 	for token in tagged_tokens:
@@ -44,7 +53,7 @@ def get_keywords(tagged_tokens):
 
 def get_proper_n(tagged_tokens):
 	"""
-	TODO
+	Retrieves all proper nouns from question, and returns them in a list
 	"""
 	named_entities = []
 	curr_token = ""
@@ -61,7 +70,8 @@ def get_proper_n(tagged_tokens):
 
 def reprioritize_nouns(tagged_tokens):
 	"""
-	TODO
+	If no proper nouns are found in the question, use this function to retrieve
+	all other common nouns that are in the question
 	"""
 	noun_list = []
 	revised_tagged_tokens = []
