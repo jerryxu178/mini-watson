@@ -1,7 +1,12 @@
 # answer retrieval for trivia-bot
+
 def prepare_answers(scored_answers, question):
 	"""
-	TODO
+	Combine any similar or duplicate answers in the scored_answers list, and
+	also remove any answers that are already stated in the question or have a 
+	score of 0. 
+
+	Return a list of answers sorted by score in descending order
 	"""
 	filtered_answers = remove_unwanted_ans(scored_answers, question)
 	filtered_answers = combine_duplicate_ans(filtered_answers)
@@ -15,7 +20,8 @@ def prepare_answers(scored_answers, question):
 
 def remove_unwanted_ans(scored_answers, question):
 	"""
-	TODO
+	Remove any answers that have a score of 0 or are already stated in the 
+	question
 	"""
 	filtered_answers = []
 	for answer in scored_answers:
@@ -27,7 +33,7 @@ def remove_unwanted_ans(scored_answers, question):
 
 def combine_duplicate_ans(scored_answers):
 	"""
-	TODO
+	Combine scores for answers that are identical
 	"""
 	answers_dict = {}
 	for answer in scored_answers:
@@ -48,7 +54,9 @@ def combine_duplicate_ans(scored_answers):
 
 def combine_similar_answers(scored_answers):
 	"""
-	TODO
+	Combine scores for answers that are similar
+	i.e. "Van" and "Van Gogh" will have their scores combined and will be 
+	stored as "Van Gogh"
 	"""
 	for ans in scored_answers:
 		for other_ans in scored_answers:
