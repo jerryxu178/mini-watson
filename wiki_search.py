@@ -4,17 +4,21 @@ import nltk
 from nltk.tag.stanford import StanfordNERTagger
 import re
 
+# set the environment path in order to use the NER tagger
 java_path = "C:/Program Files/Java/jdk1.8.0_131/bin/java.exe"
 os.environ['JAVA_HOME'] = java_path
-
 st = StanfordNERTagger('stanford-ner/classifiers/english.all.3class.distsim.crf.ser.gz',
 					   'stanford-ner/stanford-ner.jar',
 					   encoding='utf-8')
 
 def search_wikipedia(answer_type, keywords, proper_nouns):
 	"""
-	Bring up wikipedia pages of proper nouns and/or proper nouns mentioned in
-	the question. 
+	For each proper noun from the question, look up the corresponding Wikipedia
+	article. Look for potential answers in each article that have the correct
+	POS tag depending on the question, and prioritize answers that are in 
+	sentences containing keywords
+
+	Returns a list of (answer, score) tuples
 	"""
 	wiki_pages = []
 	for noun in proper_nouns:
@@ -22,16 +26,15 @@ def search_wikipedia(answer_type, keywords, proper_nouns):
 			wiki_pages.append(wikipedia.page(noun))
 		except:
 			continue
-
 	answers = []
 	for page in wiki_pages:
-		answers +=process_page(answer_type, keywords, page)
+		answers += process_page(answer_type, keywords, page)
 	return answers
 
 def generate_NE_dict(answer_type, keywords, page):
 	"""
-	Create a dictionary of named entities, with the entity as the key and the
-	corresponding tag as the value
+	Create a dictionary of named entities (proper nouns), with the entity as
+	the key and the corresponding POS tag as the value
 	"""
 	NE_dict = {}
 	contents = convert_unicode(page.content)
@@ -55,7 +58,8 @@ def generate_NE_dict(answer_type, keywords, page):
 
 def convert_unicode(contents):
 	"""
-	Convert wikipedia page contents from unicode to ascii 
+	Convert wikipedia page contents from unicode to ascii and also remove
+	unwanted characters
 	"""
 	contents = contents.encode('ascii', 'ignore')
 	contents = contents.replace("\n", "")
@@ -64,13 +68,18 @@ def convert_unicode(contents):
 
 def contains(word, wordlist):
 	"""
-	TODO
+	Return True if the word or something similar to the word is in the word 
+	list, and False otherwise
 	"""
 	return word in wordlist or word+"s" in wordlist or word[:-1] in wordlist
 
 def process_page(answer_type, keywords, page):
 	"""
-	TODO
+	Retrieve and score all potential answers from the text
+
+	Words in the text that have the correct POS tag pertaining to the question 
+	are considered to be potential answers. Answers are scored based on the 
+	number of keywords that are also found in the same sentence
 	"""
 	NE_dict = generate_NE_dict(answer_type, keywords, page)
 	sentences = []
@@ -95,9 +104,9 @@ def process_page(answer_type, keywords, page):
 
 def tag_dates(text):
 	"""
-	TODO
+	Look for all dates in the text, and return them in a dictionary where key
+	is the date and value is "DATE"
 	"""
-	# make dictionary of dates, where key is the date and value is "DATE"
 	temp_text = text
 	dates = [] # list of dates in text that require tagging
 	dates_dict = {}
@@ -120,9 +129,6 @@ def tag_dates(text):
 	return dates_dict
 
 def remove_dates(text, dates):
-	"""
-	TODO
-	"""
 	# remove dates in list from the text in order to avoid double tagging
 	clean_text = text
 	for date in dates:
