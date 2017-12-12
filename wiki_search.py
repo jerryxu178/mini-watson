@@ -106,6 +106,8 @@ def tag_dates(text):
 	"""
 	Look for all dates in the text, and return them in a dictionary where key
 	is the date and value is "DATE"
+
+	TODO: refactor duplicated code
 	"""
 	temp_text = text
 	dates = [] # list of dates in text that require tagging
