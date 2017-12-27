@@ -72,6 +72,9 @@ def reprioritize_nouns(tagged_tokens):
 	"""
 	If no proper nouns are found in the question, use this function to retrieve
 	all other common nouns that are in the question
+
+	Will try to find wiki pages of common nouns later on, since no proper nouns
+	are available
 	"""
 	noun_list = []
 	revised_tagged_tokens = []
