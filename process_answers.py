@@ -1,4 +1,6 @@
-# answer retrieval for trivia-bot
+import constants
+
+# answer retrieval for watson-lite
 
 def prepare_answers(scored_answers, question):
 	"""
@@ -10,7 +12,8 @@ def prepare_answers(scored_answers, question):
 	"""
 	filtered_answers = remove_unwanted_ans(scored_answers, question)
 	filtered_answers = combine_duplicate_ans(filtered_answers)
-	filtered_answers = combine_similar_answers(filtered_answers)
+	if constants.combine_answers:
+		filtered_answers = combine_similar_answers(filtered_answers)
 	filtered_answers.sort(key=lambda ans: ans[1]) 
 	answers = []
 	for elt in filtered_answers:
@@ -55,8 +58,8 @@ def combine_duplicate_ans(scored_answers):
 def combine_similar_answers(scored_answers):
 	"""
 	Combine scores for answers that are similar
-	i.e. "Van" and "Van Gogh" will have their scores combined and will be 
-	stored as "Van Gogh"
+	i.e. "New York" and "New York City" will have their scores combined and 
+	the corresponding answer would just be "New York City"
 	"""
 	for ans in scored_answers:
 		for other_ans in scored_answers:
