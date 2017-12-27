@@ -1,4 +1,4 @@
-# all constants for trivia-bot here
+# all constants for watson-lite here
 
 # common question words that determine what the question is asking for
 question_words = ["who", "what", "when", "where"]
@@ -9,3 +9,8 @@ keyword_tags = ["CD", "JJ", "JJR", "JJS", "NN", "NNS", "PDT", "RB", "RBR",
 
 # common verbs are not to be used as keywords
 common_verbs = ["is", "are", "was", "were", "am", "are"]
+
+# option to combine similar potential answers
+# the answers "New York" and "New York City" would have their scores combined
+# and the resulting answer will simply be "New York City", for better or worse
+combine_answers = True
