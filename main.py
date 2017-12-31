@@ -3,6 +3,7 @@ from wiki_search import search_wikipedia
 from process_answers import prepare_answers
 
 def main():
+	print "\n"
 	print "Hello! Please ask me a question."
 	while True:
 		question = raw_input(">")		
