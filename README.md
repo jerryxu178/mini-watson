@@ -1,10 +1,10 @@
-# trivia-bot
-Trivia-bot takes your trivia questions and answers them using the wisdom of Wikipedia. 
+# Watson-lite
+Watson-lite takes your trivia questions and answers them using the wisdom of Wikipedia. 
 
 ## Getting Started
 
 ### Prerequisites
-To run trivia-bot, you will need the following:
+To run Watson-lite, you will need the following:
 -Python 2.7
 -NLTK
 -Stanford NER tagger??
@@ -34,7 +34,8 @@ following commands:
 The author of Tuck Everlasting is Natalie Babbitt, Winnie Foster is actually the protagonist.
 
 ![New York City](https://github.com/jerryxu178/watson-lite/blob/master/screenshots/screenshot5.jpg?raw=true "where is the Freedom Tower?")  
-This is a fairly open-ended question, but the answer is obviously wrong. However, if we tweak the question slightly...
+This is a fairly open-ended question, but the answer is obviously wrong.  
+However, if we tweak the question slightly...
 
 ![New York City](https://github.com/jerryxu178/watson-lite/blob/master/screenshots/screenshot6.jpg?raw=true "Where is the Freedom Tower located?")  
 
