@@ -26,4 +26,10 @@ following commands:
 ## Sample Questions
 Here are some screenshots with examples of questions that trivia-bot is able to handle
 
+![Alt text](watson-lite/watson-q1.jpg?raw=true "Optional Title")
+
+
+
+
+
 ## Acknowledgements
