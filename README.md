@@ -1,11 +1,6 @@
 # trivia-bot
 Trivia-bot takes your trivia questions and answers them using the wisdom of Wikipedia. 
 
-## How it works
-Given the simple question, "Who painted the Mona Lisa?", trivia-bot would 
-
-the first step is to parse the question and recognize that the answer 
-
 ## Getting Started
 
 ### Prerequisites
