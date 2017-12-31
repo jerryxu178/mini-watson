@@ -18,8 +18,9 @@ following commands:
 2. cd trivia-bot
 3. python main.py
 
-## Sample Questions
-Here are some screenshots with examples of questions that trivia-bot is able to handle
+## Screenshots
+
+### Questions that work
 
 ![April 1492](https://github.com/jerryxu178/watson-lite/blob/master/screenshots/screenshot1.jpg?raw=true "When did Christopher Columbus sail the ocean blue?")
 
@@ -27,9 +28,15 @@ Here are some screenshots with examples of questions that trivia-bot is able to 
 
 ![Columbus](https://github.com/jerryxu178/watson-lite/blob/master/screenshots/screenshot3.jpg?raw=true "Where is the capital of Ohio?")
 
+### Questions that don't work
+
 ![Natalie Babbitt](https://github.com/jerryxu178/watson-lite/blob/master/screenshots/screenshot4.jpg?raw=true "Who is the author of Tuck Everlasting?")
 
+The author of Tuck Everlasting is Natalie Babbitt, Winnie Foster is actually the protagonist.
+
 ![New York City](https://github.com/jerryxu178/watson-lite/blob/master/screenshots/screenshot5.jpg?raw=true "Where is the Freedom Tower")
+
+This is a fairly open-ended question, but the answer is obviously wrong. However, if we tweak the question slightly...
 
 ![New York City](https://github.com/jerryxu178/watson-lite/blob/master/screenshots/screenshot6.jpg?raw=true "Where is the Freedom Tower located?")
 
