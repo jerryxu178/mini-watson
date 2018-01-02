@@ -1,8 +1,6 @@
 # Watson-lite
 Watson-lite takes your trivia questions and answers them using the wisdom of Wikipedia. 
-
 ## Screenshots
-
 ### Questions that work
 
 ![April 1492](https://github.com/jerryxu178/watson-lite/blob/master/screenshots/screenshot1.jpg?raw=true "when did Christopher Columbus sail the ocean blue?")  
