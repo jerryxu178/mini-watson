@@ -1,7 +1,7 @@
 # Watson-lite
 Watson-lite takes your trivia questions and answers them using the wisdom of Wikipedia. 
 ## Screenshots
-### Questions that work
+### Answering questions correctly
 
 ![April 1492](https://github.com/jerryxu178/watson-lite/blob/master/screenshots/screenshot1.jpg?raw=true "when did Christopher Columbus sail the ocean blue?")  
 
@@ -9,7 +9,7 @@ Watson-lite takes your trivia questions and answers them using the wisdom of Wik
 
 ![Vincent van Gogh](https://github.com/jerryxu178/watson-lite/blob/master/screenshots/screenshot3.jpg?raw=true "who painted Starry Night?")  
 
-### Questions that don't work
+### Answering questions incorrectly
 
 ![Natalie Babbitt](https://github.com/jerryxu178/watson-lite/blob/master/screenshots/screenshot4.jpg?raw=true "who is the author of Tuck Everlasting?")  
 The author of Tuck Everlasting is Natalie Babbitt, Winnie Foster is actually the protagonist.
@@ -37,6 +37,3 @@ Note: the environment variables may need to be set in wiki_search.py
 
 #### wikipedia
 Watson-lite uses the wikipedia 1.4.0 Python library. The installation instructions can be found [here](https://pypi.python.org/pypi/wikipedia/)
-
-#### Base code
-The base code can be cloned from Github.
