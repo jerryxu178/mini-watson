@@ -4,19 +4,24 @@ Watson-lite takes your trivia questions and answers them using the wisdom of Wik
 ## Getting Started
 
 ### Prerequisites
-To run Watson-lite, you will need the following:
--Python 2.7
--NLTK
--Stanford NER tagger??
--Git (recommended)
+Running Watson-lite requires NLTK, Stanford NER, and the wikipedia Python library in addition to the base code.
 
-### Running trivia-bot
-Open the command prompt and, from a directory of your choosing, run the 
-following commands:
+#### NLTK
+The Natural Langauge Tooklkit (NLTK) is useful for tokenizing text and identifying parts of speech. The installation instructions can be found [here](http://www.nltk.org/install.html)
 
-1. git clone https://github.com/jerryxu178/trivia-bot.git
-2. cd trivia-bot
-3. python main.py
+#### Stanford NER
+The instructions for installing Named Entity Recognition (NER) can be found [here](https://nlp.stanford.edu/software/CRF-NER.shtml). Note: the environment variables may need to be set in wiki_search.py
+
+#### wikipedia
+Watson-lite uses the wikipedia 1.4.0 Python library. The installation instructions can be found [here](https://pypi.python.org/pypi/wikipedia/)
+
+#### Base code
+The base code can be cloned from Github.
+
+## Running trivia-bot
+From the directory containing the installation of watson-lite, simply run
+::
+	python main.py
 
 ## Screenshots
 
@@ -40,3 +45,4 @@ However, if we tweak the question slightly...
 ![New York City](https://github.com/jerryxu178/watson-lite/blob/master/screenshots/screenshot6.jpg?raw=true "Where is the Freedom Tower located?")  
 
 ## Acknowledgements
+foo
