@@ -29,11 +29,11 @@ python main.py
 Running Watson-lite requires NLTK, Stanford NER, and the wikipedia Python library in addition to the base code.
 
 #### NLTK
-The Natural Langauge Tooklkit (NLTK) is useful for tokenizing text and identifying parts of speech. The installation instructions can be found [here](http://www.nltk.org/install.html)
+The Natural Langauge Tooklkit (NLTK) is useful for tokenizing text and identifying parts of speech. The installation instructions can be found [here](http://www.nltk.org/install.html).
 
 #### Stanford NER
 The instructions for installing Named Entity Recognition (NER) can be found [here](https://nlp.stanford.edu/software/CRF-NER.shtml). 
 Note: the environment variables may need to be set in wiki_search.py
 
 #### wikipedia
-Watson-lite uses the wikipedia 1.4.0 Python library. The installation instructions can be found [here](https://pypi.python.org/pypi/wikipedia/)
+Watson-lite uses the wikipedia 1.4.0 Python library. The installation instructions can be found [here](https://pypi.python.org/pypi/wikipedia/).
