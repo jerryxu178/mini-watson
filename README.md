@@ -21,7 +21,7 @@ The base code can be cloned from Github.
 
 ## Running trivia-bot
 From the directory containing the installation of watson-lite, simply run
-'''shell
+'''python
 python main.py
 '''
 
