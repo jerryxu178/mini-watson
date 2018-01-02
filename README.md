@@ -20,8 +20,11 @@ However, if we tweak the question slightly...
 
 ![New York City](https://github.com/jerryxu178/watson-lite/blob/master/screenshots/screenshot6.jpg?raw=true "Where is the Freedom Tower located?")  
 
-## Getting Started
-
+## Running Watson-lite
+From the directory containing the installation of Watson-lite, simply run
+```python
+python main.py
+```
 ### Prerequisites
 Running Watson-lite requires NLTK, Stanford NER, and the wikipedia Python library in addition to the base code.
 
@@ -37,9 +40,3 @@ Watson-lite uses the wikipedia 1.4.0 Python library. The installation instructio
 
 #### Base code
 The base code can be cloned from Github.
-
-## Running trivia-bot
-From the directory containing the installation of watson-lite, simply run
-```python
-python main.py
-```
