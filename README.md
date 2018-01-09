@@ -1,5 +1,5 @@
-# Watson-lite
-Watson-lite takes your trivia questions and answers them using the wisdom of Wikipedia. 
+# Mini-Watson
+Mini-Watson takes your trivia questions and answers them using the wisdom of Wikipedia. 
 ## Screenshots
 ### Answering questions correctly
 
@@ -20,13 +20,13 @@ However, if we tweak the question slightly...
 
 ![New York City](https://github.com/jerryxu178/watson-lite/blob/master/screenshots/screenshot6.jpg?raw=true "Where is the Freedom Tower located?")  
 
-## Running Watson-lite
-From the directory containing the installation of Watson-lite, simply run
+## Running Mini-Watson
+From the directory containing the installation of Mini-Watson, simply run
 ```python
 python main.py
 ```
 ### Prerequisites
-Running Watson-lite requires NLTK, Stanford NER, and the wikipedia Python library in addition to the base code.
+Running Mini-Watson requires NLTK, Stanford NER, and the wikipedia Python library in addition to the base code.
 
 #### NLTK
 The Natural Langauge Tooklkit (NLTK) is useful for tokenizing text and identifying parts of speech. The installation instructions can be found [here](http://www.nltk.org/install.html).
@@ -36,4 +36,4 @@ The instructions for installing Named Entity Recognition (NER) can be found [her
 Note: the environment variables may need to be set in wiki_search.py
 
 #### wikipedia
-Watson-lite uses the wikipedia 1.4.0 Python library. The installation instructions can be found [here](https://pypi.python.org/pypi/wikipedia/).
+Mini-Watson uses the wikipedia 1.4.0 Python library. The installation instructions can be found [here](https://pypi.python.org/pypi/wikipedia/).
