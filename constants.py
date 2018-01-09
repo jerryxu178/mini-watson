@@ -1,4 +1,4 @@
-# all constants for watson-lite here
+# all constants for mini-watson here
 
 # common question words that determine what the question is asking for
 question_words = ["who", "what", "when", "where"]
