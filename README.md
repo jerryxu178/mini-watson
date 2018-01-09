@@ -3,7 +3,7 @@ Mini-Watson takes your trivia questions and answers them using the wisdom of Wik
 ## Screenshots
 ### Answering questions correctly
 
-![April 1492](https://github.com/jerryxu178/watson-lite/blob/master/screenshots/screenshot1.jpg?raw=true "when did Christopher Columbus sail the ocean blue?")  
+![April 1492](https://github.com/jerryxu178/mini-watson/blob/master/screenshots/screenshot1.jpg?raw=true "when did Christopher Columbus sail the ocean blue?")  
 
 ![Columbus](https://github.com/jerryxu178/watson-lite/blob/master/screenshots/screenshot2.jpg?raw=true "where is the capital of Ohio?")  
 
