@@ -1,6 +1,6 @@
 import constants
 
-# answer retrieval for watson-lite
+# answer retrieval for mini-watson
 
 def prepare_answers(scored_answers, question):
 	"""
